@@ -16,28 +16,52 @@ const sortDescending = (yourArray) => {
   )
 }
 
-const findProduct = (yourArray) => {
-  if (yourArray.length <= 2) {
-    return null
-  } else if (yourArray.length == 3) {
-    return yourArray[0]*yourArray[1]*yourArray[2];
+const sortAscending = (yourArray) => {
+  let copied = yourArray.slice()
+  return copied.sort(function(a,b){
+      return b-a
+    }
+  )
+}
+
+const makeArrayAbs = (yourArray) => {
+  let output = []
+  for (element of yourArray) {
+    output.push(Math.abs(element))
   }
-  let negative = yourArray.filter(
+  return output
+}
+
+const findProduct = (yourArray) => {
+  let copied = yourArray.slice()
+  if (copied.length <= 2) {
+    return null
+  } else if (copied.length == 3) {
+    return copied[0]*copied[1]*copied[2];
+  }
+  let negative = copied.filter(
     function(element) {
       return element < 0
     }
   )
+  negative = sortDescending(negative)
   console.log(negative)
-  let positive = yourArray.filter(
+  let positive = copied.filter(
     function(element) {
       return element >= 0
     }
   )
+  positive = sortAscending(positive)
   console.log(positive)
+  if (negative.length > 2) {
+    return 
+  }
 }
 
 let test1 = [-10,-10,5,2]
 console.log(findProduct(test1))
+
+let test2 = [-10,-8,-6,5,7,9,11]
 
 $(document).ready(function() {
 
