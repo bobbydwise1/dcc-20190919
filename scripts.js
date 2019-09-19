@@ -51,11 +51,14 @@ const findProduct = (yourArray) => {
       return element >= 0
     }
   )
+  console.log(positive)
+  if (negative.length >= 2) {
+    positive.push(-negative[0])
+    positive.push(-negative[1])
+  }
   positive = sortAscending(positive)
   console.log(positive)
-  if (negative.length > 2) {
-    return 
-  }
+  return positive[0]*positive[1]*positive[2]
 }
 
 let test1 = [-10,-10,5,2]
@@ -65,13 +68,13 @@ let test2 = [-10,-8,-6,5,7,9,11]
 
 $(document).ready(function() {
 
-  $('#form1').submit(function(){
+  $('#form-1').submit(function(){
     event.preventDefault()
     input1 = $('#input-1').val()
     input1 = input1.replace(/\'/g,'"')
     input2 = JSON.parse(input1)
     console.log(input1)
-    $('#output-1').text(spiral(input2))
+    $('#output-1').text(findProduct(input2))
   })
 
 });
